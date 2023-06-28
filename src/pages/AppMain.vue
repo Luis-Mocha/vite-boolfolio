@@ -1,9 +1,11 @@
 <script>
     import axios from 'axios';
+    import CardProject from '../components/CardProject.vue';
 
     export default {
         name: 'AppMain',
         components: {
+            CardProject,
         },
         data() {
             return {
@@ -42,7 +44,7 @@
 
     <h2>Projects:</h2>
 
-    <div class="container">
+    <div class="container pb-5">
         <div class="row g-3">
 
             <!-- paginazione -->
@@ -74,43 +76,14 @@
                 </button>
             </ul>
 
-            <div class="col-6" v-for="(elem, index) in projects.data" :key="index">
-
-                <div class="card">
-                  <img class="card-img-top" :src="`${baseUrlStorage}${elem.cover_img}`" :alt="`Immagine ${elem.slug}`">
-                  <div class="card-body">
-                    <h4 class="card-title">{{ elem.title }}</h4>
-                    <p class="card-text">{{elem.description}}</p>
-
-                    <div v-if="elem.type">
-                        <p class="card-text"><strong>Tipologia:</strong> {{elem.type.name}}</p>
-                    </div>
-
-                    <div v-if="elem.technologies.length !== 0">
-                        <strong>Tecnoloogie utilizzate:</strong>
-                        <ul>
-                            <li v-for="(subElem, index) in elem.technologies" :key="index">
-                                {{ subElem.name }}
-                            </li>
-                        </ul>
-                    </div>
-                    
-
-                  </div>
-                </div>
-
-            </div>
+            <CardProject v-for="(elem, index) in projects.data" :key="index" :infoProject="elem"/>
+            
         </div>
     </div>
 
 </template>
 
 <style lang="scss" scoped>
-
-    .card-img-top {
-        height: 300px;
-        object-fit: cover;
-    }
 
     li {
         list-style-type: none;
