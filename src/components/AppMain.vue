@@ -58,4 +58,9 @@
 
 <style lang="scss" scoped>
 
+    .card-img-top {
+        max-height: 400px;
+        object-fit: cover;
+    }
+
 </style>
