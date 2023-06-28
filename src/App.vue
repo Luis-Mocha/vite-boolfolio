@@ -1,6 +1,6 @@
 <script>
 import HeaderComp from './components/HeaderComp.vue';
-import AppMain from './components/AppMain.vue';
+import AppMain from './pages/AppMain.vue';
 
 export default {
   name: 'app',
