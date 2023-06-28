@@ -1,10 +1,12 @@
 <script>
 import HeaderComp from './components/HeaderComp.vue';
+import AppMain from './components/AppMain.vue';
 
 export default {
   name: 'app',
   components: {
     HeaderComp,
+    AppMain,
   },
 }
 
@@ -12,9 +14,9 @@ export default {
 
 <template>
   
-<HeaderComp/>
+  <HeaderComp/>
 
-  <h1 class="text-center text-success">Ciao Mondo!</h1>
+  <AppMain/>
 
 </template>
 
