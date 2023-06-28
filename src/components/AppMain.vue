@@ -17,14 +17,18 @@
         },
         mounted() {
             // richiamo i projects ogni volta che carico la pagina
-            this.getProjects();
+            this.getProjects(1);
         },
         methods: {
 
-            getProjects() {
-                axios.get(`${this.baseUrlApi}projects`)
+            getProjects(projectApiPage) {
+                axios.get(`${this.baseUrlApi}projects`, {
+                    params: {
+                        page: projectApiPage
+                    }
+                })
                 .then(res => {
-                    // console.log(res.data);
+                    // console.log(res.data.projects);
                     this.projects = res.data.projects
                 })
             },
@@ -40,7 +44,23 @@
 
     <div class="container">
         <div class="row g-3">
-            <div class="col-6" v-for="(elem, index) in projects" :key="index">
+            <!-- paginazione -->
+            <ul class="d-flex">
+                <span class="me-2">Pagina:</span>
+                <button  v-if="projects.prev_page_url"  @click="getProjects(projects.current_page - 1)">
+                    &lt
+                </button>
+                <li v-for="(elem, index) in projects.last_page" :key="index">
+                    <button @click="getProjects(elem)">
+                        {{ elem }}
+                    </button>
+                </li>
+                <button v-if="projects.next_page_url" @click="getProjects(projects.current_page + 1)">
+                    >>
+                </button>
+            </ul>
+
+            <div class="col-6" v-for="(elem, index) in projects.data" :key="index">
 
                 <div class="card">
                   <img class="card-img-top" :src="`${baseUrlStorage}${elem.cover_img}`" :alt="`Immagine ${elem.slug}`">
@@ -76,6 +96,10 @@
     .card-img-top {
         height: 300px;
         object-fit: cover;
+    }
+
+    li {
+        list-style-type: none;
     }
 
 </style>
