@@ -11,6 +11,8 @@ export default {
 </script>
 
 <template>
+  
+<HeaderComp/>
 
   <h1 class="text-center text-success">Ciao Mondo!</h1>
 
