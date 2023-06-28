@@ -44,19 +44,33 @@
 
     <div class="container">
         <div class="row g-3">
+
             <!-- paginazione -->
             <ul class="d-flex">
                 <span class="me-2">Pagina:</span>
-                <button  v-if="projects.prev_page_url"  @click="getProjects(projects.current_page - 1)">
-                    &lt
+
+                <!-- bottone first page -->
+                <button v-if="projects.current_page != 1" @click="getProjects(1)">
+                    <i class="fa-solid fa-backward"></i>
                 </button>
-                <li v-for="(elem, index) in projects.last_page" :key="index">
+                <!-- bottone prev -->
+                <button  v-if="projects.prev_page_url"  @click="getProjects(projects.current_page - 1)">
+                    <i class="fa-solid fa-caret-left"></i>
+                </button>
+
+                <li v-for="(elem, index) in projects.last_page" :key="index" :class="(projects.current_page === elem) ?'active' : '' ">
                     <button @click="getProjects(elem)">
                         {{ elem }}
                     </button>
                 </li>
+
+                <!-- bottone next -->
                 <button v-if="projects.next_page_url" @click="getProjects(projects.current_page + 1)">
-                    >>
+                    <i class="fa-solid fa-caret-right"></i>
+                </button>
+                <!-- bottone last page -->
+                <button v-if="projects.current_page != projects.last_page" @click="getProjects(projects.last_page)">
+                    <i class="fa-solid fa-forward"></i>
                 </button>
             </ul>
 
@@ -100,6 +114,15 @@
 
     li {
         list-style-type: none;
+
+
+        &.active {
+            button {
+                background-color: green;
+                color: white;
+            }
+            
+        }
     }
 
 </style>
