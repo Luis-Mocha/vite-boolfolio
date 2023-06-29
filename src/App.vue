@@ -1,4 +1,5 @@
 <script>
+import {RouterView} from 'vue-router';
 import HeaderComp from './components/HeaderComp.vue';
 import AppMain from './pages/AppMain.vue';
 
@@ -16,7 +17,7 @@ export default {
   
   <HeaderComp/>
 
-  <AppMain/>
+  <router-view/>
 
 </template>
 
