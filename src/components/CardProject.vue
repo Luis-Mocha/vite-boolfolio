@@ -18,14 +18,16 @@ export default {
     <div class="col-6 car px-3">
 
         <div class="border rounded">
-            <img class="card-img-top rounded" :src="`${baseUrlStorage}${infoProject.cover_img}`" :alt="`Immagine ${infoProject.slug}`">
-            <div class="card-body">
-                <router-link :to="{name: 'project', params: {slug: infoProject.slug} } " >
 
-                    <h4 class="card-title">{{ infoProject.title }}</h4>
+            <router-link :to="{name: 'project', params: {slug: infoProject.slug} } " >
 
-                </router-link>
+                <img class="card-img-top rounded" :src="`${baseUrlStorage}${infoProject.cover_img}`" :alt="`Immagine ${infoProject.slug}`">
                 
+            </router-link>
+            
+            <div class="card-body">
+
+                <h4 class="card-title">{{ infoProject.title }}</h4>
                 <p class="card-text">{{infoProject.description}}</p>
 
                 <div v-if="infoProject.type">
