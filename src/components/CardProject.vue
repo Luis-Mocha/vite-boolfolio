@@ -20,7 +20,12 @@ export default {
         <div class="border rounded">
             <img class="card-img-top rounded" :src="`${baseUrlStorage}${infoProject.cover_img}`" :alt="`Immagine ${infoProject.slug}`">
             <div class="card-body">
-                <h4 class="card-title">{{ infoProject.title }}</h4>
+                <router-link :to="{name: 'project', params: {slug: infoProject.slug} } " >
+
+                    <h4 class="card-title">{{ infoProject.title }}</h4>
+
+                </router-link>
+                
                 <p class="card-text">{{infoProject.description}}</p>
 
                 <div v-if="infoProject.type">

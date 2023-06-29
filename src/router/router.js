@@ -14,6 +14,7 @@ import { createRouter , createWebHistory} from 'vue-router'
 // nuova sinstassi
 import AppHome from '../pages/AppHome.vue';
 import AppMain from '../pages/AppMain.vue';
+import SingleProject from '../pages/SingleProject.vue';
 
 const router = createRouter({
     history: createWebHistory(),
@@ -27,6 +28,11 @@ const router = createRouter({
             path: '/Projects',
             name: 'projects',
             component: AppMain
+        },
+        {
+            path: '/Projects/:slug',
+            name: 'project',
+            component: SingleProject
         },
     ]
 })
