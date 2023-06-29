@@ -86,7 +86,6 @@
 <style lang="scss" scoped>
 
     li {
-        list-style-type: none;
 
 
         &.active {
@@ -96,6 +95,10 @@
             }
             
         }
+    }
+
+    button {
+        padding: 1px 5px;
     }
 
 </style>
