@@ -33,7 +33,7 @@ const router = createRouter({
         {
             path: '/Projects/:slug',
             name: 'project',
-            component: SingleProject
+            component: ()=> import('../pages/SingleProject.vue')
         },
         {
             path: '/:pathMatch(.*)*',
