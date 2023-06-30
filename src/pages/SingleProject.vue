@@ -17,15 +17,27 @@ export default {
 
         getSingleProject() {
 
-            axios.get(`${this.baseUrlApi}projects/${this.$route.params.slug}`).then((response) => {
-                if (response.data.success) {
-                    console.log(response.data.project);
-                    this.singleProject = response.data.project;
-                } else {
-                    // redirect alla pagina 404
+            axios.get(`${this.baseUrlApi}projects/${this.$route.params.slug}`)
+            .then((response) => {
+                this.singleProject = response.data.project;
+
+                // sintassi try and catch
+            }, error => {
+                if (error.response.status === 404) {
+                    // console.log(error.reponse.status);
                     this.$router.push({ name: 'notFound' })
+                } else {
+                    // qualunque altro errore
                 }
-            });
+            })
+                // if (response.data.success) {
+                //     console.log(response.data.project);
+                //     this.singleProject = response.data.project;
+                // } else {
+                //     // redirect alla pagina 404
+                //     this.$router.push({ name: 'notFound' })
+                // }
+            // });
         },
     }
 }
