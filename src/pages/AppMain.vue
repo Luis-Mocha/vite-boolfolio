@@ -63,21 +63,19 @@
 
 <template> 
 
-    <h2>Projects:</h2>
-
     <div class="container pb-5">
         <div class="row g-3">
 
             <!-- paginazione -->
-            <ul class="d-flex pagination" v-if="this.projects.last_page > 1">
+            <ul class="d-flex" v-if="this.projects.last_page > 1">
                 <span class="me-2">Pagina:</span>
 
                 <!-- bottone first page -->
-                <button  @click="getProjects(1)" class="page-item" :class="(projects.current_page != 1) ? '' : ' disabled'">
+                <button @click="getProjects(1)" class="page-item" :class="(projects.current_page != 1) ? '' : ' disabled'">
                     <i class="fa-solid fa-backward"></i>
                 </button>
                 <!-- bottone prev -->
-                <button  v-if="projects.prev_page_url"  @click="getProjects(projects.current_page - 1)">
+                <button  @click="getProjects(projects.current_page - 1)" :class="(projects.prev_page_url) ? '' : ' disabled'">
                     <i class="fa-solid fa-caret-left"></i>
                 </button>
 
@@ -88,11 +86,11 @@
                 </li>
 
                 <!-- bottone next -->
-                <button v-if="projects.next_page_url" @click="getProjects(projects.current_page + 1)">
+                <button @click="getProjects(projects.current_page + 1)" :class="(projects.next_page_url) ? '' : ' disabled'">
                     <i class="fa-solid fa-caret-right"></i>
                 </button>
                 <!-- bottone last page -->
-                <button v-if="projects.current_page != projects.last_page" @click="getProjects(projects.last_page)">
+                <button @click="getProjects(projects.last_page)" :class="(projects.current_page != projects.last_page) ? '' : ' disabled'">
                     <i class="fa-solid fa-forward"></i>
                 </button>
             </ul>
@@ -123,18 +121,22 @@
 
     li {
 
-
         &.active {
             button {
                 background-color: green;
                 color: white;
-            }
-            
+            }   
         }
     }
 
     button {
         padding: 1px 5px;
+
+        &.disabled {
+            color: rgba(0, 0, 0, 0.425);
+            background-color: rgb(209, 204, 204);
+            cursor:not-allowed;
+        }
     }
 
 </style>
