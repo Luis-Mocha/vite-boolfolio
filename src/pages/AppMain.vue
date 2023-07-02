@@ -69,11 +69,11 @@
         <div class="row g-3">
 
             <!-- paginazione -->
-            <ul class="d-flex">
+            <ul class="d-flex pagination" v-if="this.projects.last_page > 1">
                 <span class="me-2">Pagina:</span>
 
                 <!-- bottone first page -->
-                <button v-if="projects.current_page != 1" @click="getProjects(1)">
+                <button  @click="getProjects(1)" class="page-item" :class="(projects.current_page != 1) ? '' : ' disabled'">
                     <i class="fa-solid fa-backward"></i>
                 </button>
                 <!-- bottone prev -->
@@ -105,7 +105,14 @@
                 </select>
             </div>
 
+            <span v-if="this.projects.total === 1">
+                C'è solo "1" progetto con questa tipologia
+            </span>
+            <span v-else-if="this.projects.total > 1">Ci sono "{{ this.projects.total }}" progetti con questa tipologia</span>
+            <span v-else> Non sono presenti progetti con questa tipologia</span>
+
             <CardProject v-for="(elem, index) in projects.data" :key="index" :infoProject="elem"/>
+            
             
         </div>
     </div>
