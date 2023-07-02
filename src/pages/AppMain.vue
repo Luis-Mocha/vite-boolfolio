@@ -63,11 +63,12 @@
 
 <template> 
 
+
     <div class="container pb-5">
         <div class="row g-3">
 
             <!-- paginazione -->
-            <ul class="d-flex" v-if="this.projects.last_page > 1">
+            <ul class="d-flex pagination" v-if="this.projects.last_page > 1">
                 <span class="me-2">Pagina:</span>
 
                 <!-- bottone first page -->
@@ -119,8 +120,8 @@
 
 <style lang="scss" scoped>
 
+.pagination {
     li {
-
         &.active {
             button {
                 background-color: green;
@@ -130,13 +131,15 @@
     }
 
     button {
-        padding: 1px 5px;
+    padding: 1px 5px;
 
         &.disabled {
             color: rgba(0, 0, 0, 0.425);
             background-color: rgb(209, 204, 204);
             cursor:not-allowed;
+            pointer-events: none;
         }
     }
+}
 
 </style>
