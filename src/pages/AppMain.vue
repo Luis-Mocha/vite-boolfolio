@@ -65,12 +65,24 @@
 
 
     <div class="container pb-5">
-        <div class="row g-3">
 
-            <!-- paginazione -->
-            <ul class="d-flex pagination" v-if="this.projects.last_page > 1">
-                <span class="me-2">Pagina:</span>
+        <div class="mb-4 filter-section p-3">
+            <label for="" class="form-label">Type filter:</label>
+            <select class="form-select form-select-lg" name="" id="type-filter" @change="typeFilter()">
+                <option value="all" selected>-- All --</option>
+                <option v-for="(elem, index) in types" :key="index" :value="elem.id"> {{ elem.name }}</option>
+            </select>
+        </div>
 
+        <div class="d-flex justify-content-between">
+            <span v-if="this.projects.total === 1">
+                C'è solo "1" progetto con questa tipologia
+            </span>
+            <span v-else-if="this.projects.total > 1">Ci sono "{{ this.projects.total }}" progetti con questa tipologia</span>
+            <span v-else> Non sono presenti progetti con questa tipologia</span>
+
+             <!-- paginazione -->
+            <div class="d-flex pagination justify-content-center" v-if="this.projects.last_page > 1">
                 <!-- bottone first page -->
                 <button @click="getProjects(1)" class="page-item" :class="(projects.current_page != 1) ? '' : ' disabled'">
                     <i class="fa-solid fa-backward"></i>
@@ -80,11 +92,11 @@
                     <i class="fa-solid fa-caret-left"></i>
                 </button>
 
-                <li v-for="(elem, index) in projects.last_page" :key="index" :class="(projects.current_page === elem) ? 'active' : '' ">
-                    <button @click="getProjects(elem)">
+                <div v-for="(elem, index) in projects.last_page" :key="index" >
+                    <button @click="getProjects(elem)" :class="(projects.current_page === elem) ? 'active' : '' ">
                         {{ elem }}
                     </button>
-                </li>
+                </div>
 
                 <!-- bottone next -->
                 <button @click="getProjects(projects.current_page + 1)" :class="(projects.next_page_url) ? '' : ' disabled'">
@@ -94,50 +106,41 @@
                 <button @click="getProjects(projects.last_page)" :class="(projects.current_page != projects.last_page) ? '' : ' disabled'">
                     <i class="fa-solid fa-forward"></i>
                 </button>
-            </ul>
-
-            <div class="mb-3">
-                <label for="" class="form-label">Type filter:</label>
-                <select class="form-select form-select-lg" name="" id="type-filter" @change="typeFilter()">
-                    <option value="all" selected>-- All --</option>
-                    <option v-for="(elem, index) in types" :key="index" :value="elem.id"> {{ elem.name }}</option>
-                </select>
             </div>
-
-            <span v-if="this.projects.total === 1">
-                C'è solo "1" progetto con questa tipologia
-            </span>
-            <span v-else-if="this.projects.total > 1">Ci sono "{{ this.projects.total }}" progetti con questa tipologia</span>
-            <span v-else> Non sono presenti progetti con questa tipologia</span>
-
-            <CardProject v-for="(elem, index) in projects.data" :key="index" :infoProject="elem"/>
-            
-            
         </div>
+
+       
+
+        <div class="card-container row g-3 my-2">
+            <CardProject v-for="(elem, index) in projects.data" :key="index" :infoProject="elem"/>
+        </div>
+
     </div>
 
 </template>
 
 <style lang="scss" scoped>
 
+.filter-section {
+    border: 2px solid green;
+
+}
+
 .pagination {
-    li {
-        &.active {
-            button {
-                background-color: green;
-                color: white;
-            }   
-        }
-    }
 
     button {
-    padding: 1px 5px;
+        padding: 1px 5px;
+
+         &.active {
+            background-color: green;
+            color: white;  
+        }
 
         &.disabled {
             color: rgba(0, 0, 0, 0.425);
             background-color: rgb(209, 204, 204);
-            cursor:not-allowed;
             pointer-events: none;
+            cursor: not-allowed;
         }
     }
 }
