@@ -14,13 +14,32 @@ export default {
 </script>
 
 <template>
-  
+
   <HeaderComp/>
 
-  <router-view/>
+  <!-- <router-view/> -->
+
+  <!-- router with transitions -->
+  <router-view v-slot="{Component}">
+    <transition name="fade" mode="out-in"> <!-- mode="out-in" -->
+      <component :is="Component" />
+    </transition>
+  </router-view>
 
 </template>
 
 <style lang="scss">
 @use './style/main.scss';
+
+  .fade-enter-from,
+  .fade-leave-to {
+    transform: translateX(-100%);
+    opacity: 0;
+  }
+
+  .fade-enter,
+  .fade-leave-to {
+    // transform 0.8s,
+    transition: transform 0.8s,  opacity 0.8s ease-out;
+  }
 </style>
