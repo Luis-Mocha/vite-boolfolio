@@ -17,11 +17,12 @@ export default {
 
     <div class="col-6 car px-3">
 
-        <div class="border rounded">
+        <div class="border rounded" >
 
             <router-link :to="{name: 'project', params: {slug: infoProject.slug} } " >
 
-                <img class="card-img-top rounded" :src="`${baseUrlStorage}${infoProject.cover_img}`" :alt="`Immagine ${infoProject.slug}`">
+                <img v-if="infoProject.cover_img != null" class="card-img-top rounded" :src="`${baseUrlStorage}${infoProject.cover_img}`" :alt="`Immagine ${infoProject.slug}`">
+                <img v-else class="card-img-top rounded" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRX-5aRfnvh_io-L7R74EcXCCm32vRTl6d04DluPIJyWwFE6PgKs9WNnoKQSfbrcXKGL-o&usqp=CAU" alt="Img placeholder">
                 
             </router-link>
             

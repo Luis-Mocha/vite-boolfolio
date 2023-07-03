@@ -83,7 +83,7 @@ export default {
 <style lang="scss" scoped>
 
     img {
-        height: 300px;
+        max-height: 300px;
         object-fit: cover;
     }
 
